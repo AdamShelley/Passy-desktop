@@ -1,8 +1,19 @@
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const url = require("url");
-const { app, BrowserWindow } = require("electron");
+const Store = require("./Store");
 
 let mainWindow;
+
+// Init store & defaults
+const store = new Store({
+  configName: "user-settings",
+  defaults: {
+    settings: {
+      hidePassword: true,
+    },
+  },
+});
 
 let isDev = false;
 
@@ -15,7 +26,7 @@ if (
 
 function createMainWindow() {
   mainWindow = new BrowserWindow({
-    width: 1100,
+    width: 800,
     height: 800,
     show: false,
     backgroundColor: "white",
@@ -44,6 +55,11 @@ function createMainWindow() {
 
   mainWindow.loadURL(indexPath);
 
+  // Store
+  mainWindow.webContents.on("dom-ready", () => {
+    mainWindow.webContents.send("settings:get", store.get("settings"));
+  });
+
   // Don't show until we are ready and loaded
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
@@ -66,6 +82,12 @@ function createMainWindow() {
 }
 
 app.on("ready", createMainWindow);
+
+// Set settings
+ipcMain.on("settings:set", (e, settings) => {
+  store.set("settings", settings);
+  mainWindow.webContents.send("settings:get", store.get("settings"));
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
