@@ -1,9 +1,10 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
 const path = require("path");
 const url = require("url");
 const Store = require("./Store");
 
 let mainWindow;
+let tray;
 
 // Init store & defaults
 const store = new Store({
@@ -28,9 +29,10 @@ function createMainWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 800,
+
     show: false,
     backgroundColor: "white",
-    icon: `${__dirname}/assets/icon.png`,
+    icon: `${__dirname}/assets/icons/png/icon.png`,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -58,6 +60,43 @@ function createMainWindow() {
   // Store
   mainWindow.webContents.on("dom-ready", () => {
     mainWindow.webContents.send("settings:get", store.get("settings"));
+  });
+
+  mainWindow.on("close", (e) => {
+    if (!app.isQuitting) {
+      e.preventDefault();
+      mainWindow.hide();
+    }
+
+    return true;
+  });
+
+  // Icon
+  const icon = path.join(__dirname, "assets", "tray.png");
+  tray = new Tray(icon);
+
+  tray.setToolTip("Passy - Password Manager");
+
+  tray.on("click", () => {
+    if (mainWindow.isVisible() === true) {
+      mainWindow.hide();
+    } else {
+      mainWindow.show();
+    }
+  });
+
+  tray.on("right-click", () => {
+    const contextMenu = Menu.buildFromTemplate([
+      {
+        label: "Quit",
+        click: () => {
+          app.isQuitting = true;
+          app.quit();
+        },
+      },
+    ]);
+
+    tray.popUpContextMenu(contextMenu);
   });
 
   // Don't show until we are ready and loaded

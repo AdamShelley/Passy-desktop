@@ -47,6 +47,9 @@ const AddPassword = ({ addPassword }) => {
               <Button type="submit" variant="secondary">
                 Save Password
               </Button>
+              <Button variant="dark" className="mx-3" onClick={() => {}}>
+                Generate Random Password
+              </Button>
             </Col>
           </Row>
         </Form>

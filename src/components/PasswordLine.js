@@ -1,28 +1,17 @@
-import React, { useState } from "react";
-import { ipcRenderer } from "electron";
+import React from "react";
+
 import Button from "react-bootstrap/Button";
 import Moment from "react-moment";
 
 const PasswordLine = ({
   pass: { _id, name, password, created },
   deletePassword,
+  settings,
 }) => {
-  const [hidePass, setHidePass] = useState();
-  console.log(hidePass);
-
-  ipcRenderer.on("settings:get", (e, settings) => {
-    console.log(settings);
-    if (settings.hidePassword === false) {
-      setHidePass(false);
-    } else {
-      setHidePass(true);
-    }
-  });
-
   return (
     <tr>
       <td>{name}</td>
-      <td>{hidePass ? "*".repeat(password.length) : password}</td>
+      <td>{settings.hidePassword ? "*".repeat(password.length) : password}</td>
       <td>
         <Moment format="MMMM do YYYY">{new Date(created)}</Moment>
       </td>

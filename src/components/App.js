@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { ipcRenderer } from "electron";
 import PasswordLine from "./PasswordLine";
 import AddPassword from "./AddPassword";
 import SettingsPage from "./SettingsPage";
 import Container from "react-bootstrap/container";
 import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
 const App = () => {
@@ -28,12 +30,18 @@ const App = () => {
     },
   ]);
 
+  const [settings, setSettings] = useState(null);
+
   const [alert, setAlert] = useState({
     show: false,
     message: "",
     variant: "success",
   });
   const [settingsPage, setSettingsPage] = useState(false);
+
+  ipcRenderer.on("settings:get", (e, settings) => {
+    setSettings(settings);
+  });
 
   const addPassword = (pass) => {
     if (pass.name === "" || pass.pass)
@@ -66,7 +74,7 @@ const App = () => {
 
   return (
     <Container>
-      {!settingsPage ? (
+      {!settingsPage && settings ? (
         <>
           <AddPassword addPassword={addPassword} />
           {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
@@ -84,14 +92,21 @@ const App = () => {
                   pass={pass}
                   key={index}
                   deletePassword={deletePassword}
+                  settings={settings}
                 />
               ))}
             </tbody>
           </Table>
-          <h3 onClick={() => setSettingsPage(true)}>Settings</h3>
+          <Button variant="light" onClick={() => setSettingsPage(true)}>
+            Settings
+          </Button>
         </>
       ) : (
-        <SettingsPage setSettingsPage={setSettingsPage} />
+        <SettingsPage
+          setSettingsPage={setSettingsPage}
+          defaultSettings={settings}
+          alert={showAlert}
+        />
       )}
     </Container>
   );
