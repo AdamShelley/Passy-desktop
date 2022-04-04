@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { addSyntheticTrailingComment } from "typescript";
+import createPassword from "../utils/createPassword";
 
 const AddPassword = ({ addPassword }) => {
   const [name, setName] = useState("");
@@ -18,6 +18,8 @@ const AddPassword = ({ addPassword }) => {
 
     setName("");
     setPass("");
+
+    console.log("password saved");
   };
 
   return (
@@ -47,7 +49,11 @@ const AddPassword = ({ addPassword }) => {
               <Button type="submit" variant="secondary">
                 Save Password
               </Button>
-              <Button variant="dark" className="mx-3" onClick={() => {}}>
+              <Button
+                variant="dark"
+                className="mx-3"
+                onClick={() => setPass(createPassword(20))}
+              >
                 Generate Random Password
               </Button>
             </Col>

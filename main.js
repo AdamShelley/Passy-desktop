@@ -16,6 +16,29 @@ const store = new Store({
   },
 });
 
+const database = new Store({
+  configName: "database",
+  defaults: {
+    database: [
+      {
+        name: "Spotify",
+        password: "aekfealkffaekl",
+        created: new Date().toString(),
+      },
+      {
+        name: "Instagram",
+        password: "s;lkdfgsklfsjflk",
+        created: new Date().toString(),
+      },
+      {
+        name: "Facebook",
+        password: "afdlkdfamklaefkle",
+        created: new Date().toString(),
+      },
+    ],
+  },
+});
+
 let isDev = false;
 
 if (
@@ -57,9 +80,11 @@ function createMainWindow() {
 
   mainWindow.loadURL(indexPath);
 
-  // Store
   mainWindow.webContents.on("dom-ready", () => {
+    // Store
     mainWindow.webContents.send("settings:get", store.get("settings"));
+    // Handling password saving
+    mainWindow.webContents.send("database:get", database.get("database"));
   });
 
   mainWindow.on("close", (e) => {
@@ -126,6 +151,12 @@ app.on("ready", createMainWindow);
 ipcMain.on("settings:set", (e, settings) => {
   store.set("settings", settings);
   mainWindow.webContents.send("settings:get", store.get("settings"));
+});
+
+// Set database
+ipcMain.on("database:add", (e, pass) => {
+  database.set("database", pass);
+  mainWindow.webContents.send("database:get", database.get("database"));
 });
 
 app.on("window-all-closed", () => {

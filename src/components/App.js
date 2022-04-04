@@ -7,30 +7,16 @@ import Container from "react-bootstrap/container";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import {
+  createBigIntLiteral,
+  createNoSubstitutionTemplateLiteral,
+} from "typescript";
 
 const App = () => {
-  const [savedPasswords, setSavedPasswords] = useState([
-    {
-      _id: 1,
-      name: "Spotify",
-      password: "12ksflkg",
-      created: new Date().toString(),
-    },
-    {
-      _id: 2,
-      name: "facebook",
-      password: "agkmsdlfnk",
-      created: new Date().toString(),
-    },
-    {
-      _id: 3,
-      name: "cake",
-      password: "slrgksfmgkl",
-      created: new Date().toString(),
-    },
-  ]);
+  const [savedPasswords, setSavedPasswords] = useState([]);
 
   const [settings, setSettings] = useState(null);
+  const [database, setDatabase] = useState(null);
 
   const [alert, setAlert] = useState({
     show: false,
@@ -43,12 +29,19 @@ const App = () => {
     setSettings(settings);
   });
 
+  ipcRenderer.on("database:get", (e, database) => {
+    setDatabase(database);
+  });
+
   const addPassword = (pass) => {
-    if (pass.name === "" || pass.pass)
+    if (pass.name === "" || pass.password === "")
       return showAlert("Please enter all fields", "danger");
     pass._id = Math.floor(Math.random() * 10);
     pass.created = new Date().toString();
     setSavedPasswords([...savedPasswords, pass]);
+
+    ipcRenderer.send("database:add", pass);
+
     showAlert("Password added");
   };
 
@@ -72,6 +65,8 @@ const App = () => {
     }, seconds);
   };
 
+  console.log(database);
+
   return (
     <Container>
       {!settingsPage && settings ? (
@@ -87,14 +82,15 @@ const App = () => {
               </tr>
             </thead>
             <tbody>
-              {savedPasswords.map((pass, index) => (
-                <PasswordLine
-                  pass={pass}
-                  key={index}
-                  deletePassword={deletePassword}
-                  settings={settings}
-                />
-              ))}
+              {database &&
+                database.map((pass, index) => (
+                  <PasswordLine
+                    pass={pass}
+                    key={index}
+                    deletePassword={deletePassword}
+                    settings={settings}
+                  />
+                ))}
             </tbody>
           </Table>
           <Button variant="light" onClick={() => setSettingsPage(true)}>

@@ -25,6 +25,9 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
             onChange={updateSettings}
           />
           <label htmlFor="showPasswords">Show Passwords</label>
+          <Button size="sm" variant="light">
+            Download passwords
+          </Button>
 
           <Button
             size="sm"

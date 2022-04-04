@@ -8,10 +8,16 @@ const PasswordLine = ({
   deletePassword,
   settings,
 }) => {
+  const copyToClipboard = () => {
+    console.log("Copying to clipboard");
+  };
+
   return (
     <tr>
       <td>{name}</td>
-      <td>{settings.hidePassword ? "*".repeat(password.length) : password}</td>
+      <td style={{ cursor: "pointer" }} onClick={copyToClipboard}>
+        {settings.hidePassword ? "*".repeat(password.length) : password}
+      </td>
       <td>
         <Moment format="MMMM do YYYY">{new Date(created)}</Moment>
       </td>
