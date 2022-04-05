@@ -36,7 +36,7 @@ const App = () => {
   const addPassword = (pass) => {
     if (pass.name === "" || pass.password === "")
       return showAlert("Please enter all fields", "danger");
-    pass._id = Math.floor(Math.random() * 10);
+    pass._id = Math.floor(Math.random() * 100);
     pass.created = new Date().toString();
     setSavedPasswords([...savedPasswords, pass]);
 
@@ -46,7 +46,10 @@ const App = () => {
   };
 
   const deletePassword = (_id) => {
+    console.log("deleting: " + _id);
     setSavedPasswords(savedPasswords.filter((pass) => pass._id !== _id));
+
+    ipcRenderer.send("database:delete", _id);
   };
 
   const showAlert = (message, variant = "success", seconds = 3000) => {
@@ -64,8 +67,6 @@ const App = () => {
       });
     }, seconds);
   };
-
-  console.log(database);
 
   return (
     <Container>

@@ -22,9 +22,13 @@ class Store {
   }
 
   add(pass) {
-    console.log("this.data: " + this.data);
-
-    // fs.writeFileSync(this.path, JSON.stringify(this.data));
+    console.log(pass);
+    this.data.database.push(pass);
+    fs.writeFileSync(this.path, JSON.stringify(this.data));
+  }
+  delete(id) {
+    this.data.database.filter((pass) => pass._id !== id);
+    fs.writeFileSync(this.path, JSON.stringify(this.data));
   }
 }
 

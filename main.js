@@ -19,23 +19,7 @@ const store = new Store({
 const database = new Store({
   configName: "database",
   defaults: {
-    database: [
-      {
-        name: "Spotify",
-        password: "aekfealkffaekl",
-        created: new Date().toString(),
-      },
-      {
-        name: "Instagram",
-        password: "s;lkdfgsklfsjflk",
-        created: new Date().toString(),
-      },
-      {
-        name: "Facebook",
-        password: "afdlkdfamklaefkle",
-        created: new Date().toString(),
-      },
-    ],
+    database: [],
   },
 });
 
@@ -155,7 +139,12 @@ ipcMain.on("settings:set", (e, settings) => {
 
 // Set database
 ipcMain.on("database:add", (e, pass) => {
-  database.set("database", pass);
+  database.add(pass);
+  mainWindow.webContents.send("database:get", database.get("database"));
+});
+
+ipcMain.on("database:delete", (e, id) => {
+  database.delete(id);
   mainWindow.webContents.send("database:get", database.get("database"));
 });
 
