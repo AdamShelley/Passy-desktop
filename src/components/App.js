@@ -49,7 +49,7 @@ const App = () => {
     console.log("deleting: " + _id);
     setSavedPasswords(savedPasswords.filter((pass) => pass._id !== _id));
 
-    ipcRenderer.send("database:delete", _id);
+    ipcRenderer.send("database:deletePass", _id);
   };
 
   const showAlert = (message, variant = "success", seconds = 3000) => {

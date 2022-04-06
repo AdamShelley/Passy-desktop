@@ -26,8 +26,8 @@ class Store {
     this.data.database.push(pass);
     fs.writeFileSync(this.path, JSON.stringify(this.data));
   }
-  delete(id) {
-    this.data.database.filter((pass) => pass._id !== id);
+  deletePass(id) {
+    this.data.database = this.data.database.filter((pass) => pass._id !== id);
     fs.writeFileSync(this.path, JSON.stringify(this.data));
   }
 }

@@ -36,7 +36,6 @@ function createMainWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 800,
-
     show: false,
     backgroundColor: "white",
     icon: `${__dirname}/assets/icons/png/icon.png`,
@@ -143,8 +142,8 @@ ipcMain.on("database:add", (e, pass) => {
   mainWindow.webContents.send("database:get", database.get("database"));
 });
 
-ipcMain.on("database:delete", (e, id) => {
-  database.delete(id);
+ipcMain.on("database:deletePass", (e, id) => {
+  database.deletePass(id);
   mainWindow.webContents.send("database:get", database.get("database"));
 });
 

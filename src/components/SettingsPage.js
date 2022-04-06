@@ -1,6 +1,7 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import { ipcRenderer } from "electron";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
   const updateSettings = () => {
