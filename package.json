@@ -26,7 +26,8 @@
     "react": "^16.13.1",
     "react-bootstrap": "^2.2.2",
     "react-dom": "^16.13.1",
-    "react-moment": "^1.1.1"
+    "react-moment": "^1.1.1",
+    "use-copy": "^0.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

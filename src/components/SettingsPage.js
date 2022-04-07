@@ -14,7 +14,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
   };
 
   return (
-    <>
+    <Card>
       {defaultSettings && (
         <div>
           <h1>Settings</h1>
@@ -39,7 +39,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
           </Button>
         </div>
       )}
-    </>
+    </Card>
   );
 };
 

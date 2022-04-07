@@ -90,6 +90,7 @@ const App = () => {
                     key={index}
                     deletePassword={deletePassword}
                     settings={settings}
+                    alert={showAlert}
                   />
                 ))}
             </tbody>
