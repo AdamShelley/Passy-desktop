@@ -147,6 +147,12 @@ ipcMain.on("database:deletePass", (e, id) => {
   mainWindow.webContents.send("database:get", database.get("database"));
 });
 
+// Save passwords to a local file
+ipcMain.on("database:download", (e) => {
+  database.downloadPasswords();
+  console.log("Downloaded");
+});
+
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();

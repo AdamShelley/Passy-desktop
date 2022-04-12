@@ -1,6 +1,7 @@
 const electron = require("electron");
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 
 class Store {
   constructor(options) {
@@ -29,6 +30,23 @@ class Store {
   deletePass(id) {
     this.data.database = this.data.database.filter((pass) => pass._id !== id);
     fs.writeFileSync(this.path, JSON.stringify(this.data));
+  }
+  downloadPasswords() {
+    let string = this.data.database.map(({ _id, created, ...line }) => line);
+
+    console.log(string);
+
+    // try {
+    //   fs.open(path.join(__dirname, "./", "passwords.txt"), "w", (e, id) => {
+    //     fs.write(id, string, null, "utf-8", () => {
+    //       fs.close(id, () => {
+    //         console.log("Password saved to passwords.txt");
+    //       });
+    //     });
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 }
 

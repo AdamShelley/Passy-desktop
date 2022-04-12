@@ -1,7 +1,7 @@
 import React from "react";
 import { ipcRenderer } from "electron";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -15,8 +15,12 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
     console.log("settings saved");
   };
 
+  const downloadPasswords = () => {
+    ipcRenderer.send("database:download");
+  };
+
   return (
-    <Card className="mt-5">
+    <Container className="mt-5">
       {defaultSettings && (
         <>
           <Row>
@@ -40,7 +44,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
           </Row>
           <Row>
             <Col>
-              <Button size="sm" variant="light">
+              <Button size="sm" variant="light" onClick={downloadPasswords}>
                 Download passwords
               </Button>
             </Col>
@@ -56,7 +60,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
           </Row>
         </>
       )}
-    </Card>
+    </Container>
   );
 };
 
