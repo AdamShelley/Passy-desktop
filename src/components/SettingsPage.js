@@ -20,7 +20,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5" style={{ minHeight: "30vh" }}>
       {defaultSettings && (
         <>
           <Row>
@@ -29,7 +29,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className="mt-3">
               <input
                 type="checkbox"
                 name="showPasswords"
@@ -37,12 +37,13 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
                 checked={defaultSettings.hidePassword ? false : true}
                 onChange={updateSettings}
               />
-            </Col>
-            <Col>
-              <label htmlFor="showPasswords">Show Passwords</label>
+
+              <label htmlFor="showPasswords" style={{ marginLeft: "1rem" }}>
+                Show Passwords
+              </label>
             </Col>
           </Row>
-          <Row>
+          <Row className="mt-5">
             <Col>
               <Button size="sm" variant="light" onClick={downloadPasswords}>
                 Download passwords

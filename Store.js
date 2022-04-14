@@ -39,7 +39,7 @@ class Store {
 
     // turn into string
 
-    let string = JSON.stringify(database).replace(/[^A-Z\d\s]/gi, "");
+    let string = JSON.stringify(database);
 
     console.log(string);
 
