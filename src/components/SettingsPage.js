@@ -19,6 +19,10 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
     ipcRenderer.send("database:download");
   };
 
+  const deletePasswords = () => {
+    ipcRenderer.send("database:deleteAll");
+  };
+
   return (
     <Container className="mt-5" style={{ minHeight: "30vh" }}>
       {defaultSettings && (
@@ -45,6 +49,13 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
           </Row>
           <Row className="mt-5">
             <Col>
+              <Button size="sm" variant="danger" onClick={deletePasswords}>
+                Delete All passwords
+              </Button>
+            </Col>
+          </Row>
+          <Row className="mt-5">
+            <Col>
               <Button size="sm" variant="light" onClick={downloadPasswords}>
                 Download passwords
               </Button>
@@ -52,7 +63,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
             <Col>
               <Button
                 size="sm"
-                variant="danger"
+                variant="primary"
                 onClick={() => setSettingsPage(false)}
               >
                 Exit Settings

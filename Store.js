@@ -55,6 +55,10 @@ class Store {
       console.log(error);
     }
   }
+  deleteAll() {
+    this.data.database = [];
+    fs.writeFileSync(this.path, JSON.stringify(this.data));
+  }
 }
 
 function parseDataFile(filePath, defaults) {

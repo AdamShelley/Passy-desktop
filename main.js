@@ -153,6 +153,12 @@ ipcMain.on("database:download", (e) => {
   console.log("Downloaded");
 });
 
+ipcMain.on("database:deleteAll", (e) => {
+  database.deleteAll();
+  mainWindow.webContents.send("database:get", database.get("database"));
+  console.log("All passwords deleted");
+});
+
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
