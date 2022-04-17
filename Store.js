@@ -39,7 +39,7 @@ class Store {
 
     // turn into string
 
-    let string = JSON.stringify(database);
+    let string = JSON.stringify(database).replace(/\\"/g, "");
 
     console.log(string);
 

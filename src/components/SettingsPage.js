@@ -54,12 +54,14 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
               </Button>
             </Col>
           </Row>
-          <Row className="mt-5">
+          <Row className="mt-3">
             <Col>
               <Button size="sm" variant="light" onClick={downloadPasswords}>
                 Download passwords
               </Button>
             </Col>
+          </Row>
+          <Row className="mt-3">
             <Col>
               <Button
                 size="sm"
