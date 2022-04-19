@@ -34,7 +34,7 @@ if (
 
 function createMainWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 700,
     height: 800,
     show: false,
     backgroundColor: "white",

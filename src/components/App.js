@@ -74,6 +74,7 @@ const App = () => {
         <>
           <AddPassword addPassword={addPassword} />
           {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
+          <input type="text" placeholder="Search Passwords"></input>
           <Table>
             <thead>
               <tr>
