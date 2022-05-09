@@ -5,6 +5,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import close from "../../assets/close.png";
+
 const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
   const updateSettings = () => {
     ipcRenderer.send("settings:set", {
@@ -31,6 +33,20 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
             <Col>
               <h1>Settings</h1>
             </Col>
+            <Col>
+              <span onClick={() => setSettingsPage(false)}>
+                <img
+                  style={{
+                    height: "1.5rem",
+                    cursor: "pointer",
+                    border: "1px solid #333",
+                    padding: ".3rem",
+                  }}
+                  src={close}
+                  alt="X"
+                />
+              </span>
+            </Col>
           </Row>
           <Row>
             <Col className="mt-3">
@@ -49,19 +65,20 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
           </Row>
           <Row className="mt-5">
             <Col>
-              <Button size="sm" variant="danger" onClick={deletePasswords}>
-                Delete All passwords
-              </Button>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col>
               <Button size="sm" variant="light" onClick={downloadPasswords}>
                 Download passwords
               </Button>
             </Col>
           </Row>
           <Row className="mt-3">
+            <Col>
+              <Button size="sm" variant="danger" onClick={deletePasswords}>
+                Delete All passwords
+              </Button>
+            </Col>
+          </Row>
+
+          {/* <Row className="mt-3">
             <Col>
               <Button
                 size="sm"
@@ -71,7 +88,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
                 Exit Settings
               </Button>
             </Col>
-          </Row>
+          </Row> */}
         </>
       )}
     </Container>
