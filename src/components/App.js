@@ -8,13 +8,10 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
-
 const App = () => {
   const [savedPasswords, setSavedPasswords] = useState([]);
-
   const [settings, setSettings] = useState(null);
   const [database, setDatabase] = useState(null);
-
   const [alert, setAlert] = useState({
     show: false,
     message: "",
@@ -22,12 +19,15 @@ const App = () => {
   });
   const [settingsPage, setSettingsPage] = useState(false);
 
+  const [searchedPasswords, setSearchedPasswords] = useState(null);
+
   ipcRenderer.on("settings:get", (e, settings) => {
     setSettings(settings);
   });
 
   ipcRenderer.on("database:get", (e, database) => {
     setDatabase(database);
+    setSearchedPasswords(database);
   });
 
   const addPassword = (pass) => {
@@ -65,13 +65,31 @@ const App = () => {
     }, seconds);
   };
 
+  const filterPasswords = (e) => {
+    const searchString = e.target.value.toLowerCase();
+    if (searchString.length > 0) {
+      const newList = database.filter((line) => {
+        return line.name.toLowerCase().match(searchString);
+      });
+      setSearchedPasswords(newList);
+    }
+
+    if (searchString.length === 0) {
+      setSearchedPasswords(database);
+    }
+  };
+
   return (
     <Container>
       {!settingsPage && settings ? (
         <>
           <AddPassword addPassword={addPassword} />
           {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
-          <input type="text" placeholder="Search Passwords"></input>
+          <input
+            type="text"
+            placeholder="Search Passwords"
+            onChange={(e) => filterPasswords(e)}
+          ></input>
           <Table>
             <thead>
               <tr>
@@ -81,8 +99,8 @@ const App = () => {
               </tr>
             </thead>
             <tbody>
-              {database &&
-                database.map((pass, index) => (
+              {searchedPasswords &&
+                searchedPasswords.map((pass, index) => (
                   <PasswordLine
                     pass={pass}
                     key={index}
