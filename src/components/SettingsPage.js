@@ -33,20 +33,6 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
             <Col>
               <h1>Settings</h1>
             </Col>
-            <Col>
-              <span onClick={() => setSettingsPage(false)}>
-                <img
-                  style={{
-                    height: "1.5rem",
-                    cursor: "pointer",
-                    border: "1px solid #333",
-                    padding: ".3rem",
-                  }}
-                  src={close}
-                  alt="X"
-                />
-              </span>
-            </Col>
           </Row>
           <Row>
             <Col className="mt-3">
@@ -77,18 +63,6 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
               </Button>
             </Col>
           </Row>
-
-          {/* <Row className="mt-3">
-            <Col>
-              <Button
-                size="sm"
-                variant="primary"
-                onClick={() => setSettingsPage(false)}
-              >
-                Exit Settings
-              </Button>
-            </Col>
-          </Row> */}
         </>
       )}
     </Container>

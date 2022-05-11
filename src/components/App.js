@@ -6,9 +6,16 @@ import SettingsPage from "./SettingsPage";
 import Container from "react-bootstrap/container";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 import Alert from "react-bootstrap/Alert";
+import Form from "react-bootstrap/Form";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+
+import "../App.css";
 
 const App = () => {
+  const [key, setKey] = useState("home");
   const [savedPasswords, setSavedPasswords] = useState([]);
   const [settings, setSettings] = useState(null);
   const [database, setDatabase] = useState(null);
@@ -79,49 +86,61 @@ const App = () => {
     }
   };
 
+  const home = (
+    <>
+      {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
+      <AddPassword addPassword={addPassword} />
+
+      <Row className="m-3">
+        <Form.Control
+          type="text"
+          placeholder="Search Passwords"
+          onChange={(e) => filterPasswords(e)}
+        />
+      </Row>
+      <Table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Date added</th>
+          </tr>
+        </thead>
+        <tbody>
+          {searchedPasswords &&
+            searchedPasswords.map((pass, index) => (
+              <PasswordLine
+                pass={pass}
+                key={index}
+                deletePassword={deletePassword}
+                settings={settings}
+                alert={showAlert}
+              />
+            ))}
+        </tbody>
+      </Table>
+    </>
+  );
+
   return (
     <Container>
-      {!settingsPage && settings ? (
-        <>
-          <AddPassword addPassword={addPassword} />
-          {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
-          <input
-            type="text"
-            placeholder="Search Passwords"
-            onChange={(e) => filterPasswords(e)}
-          ></input>
-          <Table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Password</th>
-                <th>Date added</th>
-              </tr>
-            </thead>
-            <tbody>
-              {searchedPasswords &&
-                searchedPasswords.map((pass, index) => (
-                  <PasswordLine
-                    pass={pass}
-                    key={index}
-                    deletePassword={deletePassword}
-                    settings={settings}
-                    alert={showAlert}
-                  />
-                ))}
-            </tbody>
-          </Table>
-          <Button variant="light" onClick={() => setSettingsPage(true)}>
-            Settings
-          </Button>
-        </>
-      ) : (
-        <SettingsPage
-          setSettingsPage={setSettingsPage}
-          defaultSettings={settings}
-          alert={showAlert}
-        />
-      )}
+      <Tabs
+        id="controlled-tab"
+        activeKey={key}
+        onSelect={(k) => setKey(k)}
+        className="mt-3 mb-3"
+      >
+        <Tab eventKey="home" title="Home" className="custom-tab-styles">
+          {home}
+        </Tab>
+        <Tab eventKey="settings" title="Settings" className="custom-tab-styles">
+          <SettingsPage
+            setSettingsPage={setSettingsPage}
+            defaultSettings={settings}
+            alert={showAlert}
+          />
+        </Tab>
+      </Tabs>
     </Container>
   );
 };
