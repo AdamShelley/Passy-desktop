@@ -5,8 +5,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import close from "../../assets/close.png";
-
 const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
   const updateSettings = () => {
     ipcRenderer.send("settings:set", {
@@ -19,6 +17,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
 
   const downloadPasswords = () => {
     ipcRenderer.send("database:download");
+    alert("Downloaded Passwords");
   };
 
   const deletePasswords = () => {

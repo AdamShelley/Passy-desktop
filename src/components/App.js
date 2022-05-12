@@ -13,6 +13,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
 import "../App.css";
+import { setTokenSourceMapRange } from "typescript";
 
 const App = () => {
   const [key, setKey] = useState("home");
@@ -24,9 +25,9 @@ const App = () => {
     message: "",
     variant: "success",
   });
-  const [settingsPage, setSettingsPage] = useState(false);
 
   const [searchedPasswords, setSearchedPasswords] = useState(null);
+  const [numResults, setNumResults] = useState();
 
   ipcRenderer.on("settings:get", (e, settings) => {
     setSettings(settings);
@@ -35,6 +36,7 @@ const App = () => {
   ipcRenderer.on("database:get", (e, database) => {
     setDatabase(database);
     setSearchedPasswords(database);
+    setNumResults(database.length);
   });
 
   const addPassword = (pass) => {
@@ -79,6 +81,7 @@ const App = () => {
         return line.name.toLowerCase().match(searchString);
       });
       setSearchedPasswords(newList);
+      setNumResults(newList.length);
     }
 
     if (searchString.length === 0) {
@@ -98,12 +101,13 @@ const App = () => {
           onChange={(e) => filterPasswords(e)}
         />
       </Row>
-      <Table>
+      <Table className="table-styles">
         <thead>
           <tr>
             <th>Name</th>
             <th>Password</th>
             <th>Date added</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -119,6 +123,7 @@ const App = () => {
             ))}
         </tbody>
       </Table>
+      <p>No. of results found: {numResults}</p>
     </>
   );
 
@@ -134,11 +139,7 @@ const App = () => {
           {home}
         </Tab>
         <Tab eventKey="settings" title="Settings" className="custom-tab-styles">
-          <SettingsPage
-            setSettingsPage={setSettingsPage}
-            defaultSettings={settings}
-            alert={showAlert}
-          />
+          <SettingsPage defaultSettings={settings} alert={showAlert} />
         </Tab>
       </Tabs>
     </Container>

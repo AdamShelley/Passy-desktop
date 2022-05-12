@@ -23,7 +23,7 @@ const AddPassword = ({ addPassword }) => {
   };
 
   return (
-    <Card className="mt-5 mb-5">
+    <Card className="mt-5 mb-3">
       <Card.Body>
         <Form onSubmit={onSubmitPassword}>
           <Row className="my-3">

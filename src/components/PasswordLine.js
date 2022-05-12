@@ -22,9 +22,13 @@ const PasswordLine = ({
   };
 
   return (
-    <tr>
+    <tr className="table-line-styles">
       <td>{name}</td>
-      <td style={{ cursor: "pointer" }} onClick={copyToClipboard}>
+      <td
+        className="table-line-styles--password"
+        style={{ cursor: "pointer" }}
+        onClick={copyToClipboard}
+      >
         {settings.hidePassword ? "*".repeat(password.length) : password}
       </td>
       <td>
