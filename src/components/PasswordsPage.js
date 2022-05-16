@@ -5,8 +5,14 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 
-const PasswordsPage = ({ deletePassword, settings, showAlert, database }) => {
-  const [searchedPasswords, setSearchedPasswords] = useState(database);
+const PasswordsPage = ({
+  deletePassword,
+  settings,
+  showAlert,
+  database,
+  searchedPasswords,
+  setSearchedPasswords,
+}) => {
   const [numResults, setNumResults] = useState();
 
   const filterPasswords = (e) => {

@@ -15,6 +15,7 @@ const App = () => {
   const [savedPasswords, setSavedPasswords] = useState([]);
   const [settings, setSettings] = useState(null);
   const [database, setDatabase] = useState(null);
+  const [searchedPasswords, setSearchedPasswords] = useState();
   const [alert, setAlert] = useState({
     show: false,
     message: "",
@@ -27,6 +28,7 @@ const App = () => {
 
   ipcRenderer.on("database:get", (e, database) => {
     setDatabase(database);
+    setSearchedPasswords(database);
   });
 
   const addPassword = (pass) => {
@@ -85,6 +87,8 @@ const App = () => {
         <Tab eventKey="passwords" title="Passwords">
           <PasswordsPage
             database={database}
+            searchedPasswords={searchedPasswords}
+            setSearchedPasswords={setSearchedPasswords}
             deletePassword={deletePassword}
             settings={settings}
             showAlert={showAlert}
