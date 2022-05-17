@@ -59,6 +59,10 @@ const AddPassword = ({ addPassword }) => {
             </Col>
           </Row>
         </Form>
+
+        <p>- Special Characters</p>
+        <p>- Numbers</p>
+        <p>- Length of password</p>
       </Card.Body>
     </Card>
   );

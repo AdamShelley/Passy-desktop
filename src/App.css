@@ -2,16 +2,35 @@
 
 body {
  font-family: 'Quicksand', sans-serif !important;
+
+
+}
+
+.background-indent {
+    background-color: #514f4f37;
+    width: 100%;
+    height: 20vh;
+    position:absolute;
+    bottom: 0;
+    -webkit-clip-path: ellipse(70% 50% at 50% 92%);
+    clip-path: ellipse(70% 70% at 50% 92%);
+    margin-top: 2rem;
+    z-index: -1;
 }
 
 .nav-link {
     color: #3b3b3b !important;
-
     font-weight: 700 !important;
 }
 
 .nav-link:focus {
     border: 1px solid #3b3b3b; 
+}
+
+.password-table-container {
+    max-height: 50vh;
+    overflow: scroll;
+    z-index: 5;
 }
 
 .table-styles {

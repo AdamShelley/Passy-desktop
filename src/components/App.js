@@ -16,6 +16,7 @@ const App = () => {
   const [settings, setSettings] = useState(null);
   const [database, setDatabase] = useState(null);
   const [searchedPasswords, setSearchedPasswords] = useState();
+  const [numResults, setNumResults] = useState(0);
   const [alert, setAlert] = useState({
     show: false,
     message: "",
@@ -29,6 +30,7 @@ const App = () => {
   ipcRenderer.on("database:get", (e, database) => {
     setDatabase(database);
     setSearchedPasswords(database);
+    setNumResults(database.length);
   });
 
   const addPassword = (pass) => {
@@ -74,31 +76,40 @@ const App = () => {
   );
 
   return (
-    <Container>
-      <Tabs
-        id="controlled-tab"
-        activeKey={key}
-        onSelect={(k) => setKey(k)}
-        className="mt-3 mb-3"
-      >
-        <Tab eventKey="home" title="Home" className="custom-tab-styles">
-          {home}
-        </Tab>
-        <Tab eventKey="passwords" title="Passwords">
-          <PasswordsPage
-            database={database}
-            searchedPasswords={searchedPasswords}
-            setSearchedPasswords={setSearchedPasswords}
-            deletePassword={deletePassword}
-            settings={settings}
-            showAlert={showAlert}
-          />
-        </Tab>
-        <Tab eventKey="settings" title="Settings" className="custom-tab-styles">
-          <SettingsPage defaultSettings={settings} alert={showAlert} />
-        </Tab>
-      </Tabs>
-    </Container>
+    <>
+      <Container>
+        <Tabs
+          id="controlled-tab"
+          activeKey={key}
+          onSelect={(k) => setKey(k)}
+          className="mt-3 mb-3"
+        >
+          <Tab eventKey="home" title="Home" className="custom-tab-styles">
+            {home}
+          </Tab>
+          <Tab eventKey="passwords" title="Passwords">
+            <PasswordsPage
+              database={database}
+              searchedPasswords={searchedPasswords}
+              setSearchedPasswords={setSearchedPasswords}
+              numResults={numResults}
+              setNumResults={setNumResults}
+              deletePassword={deletePassword}
+              settings={settings}
+              showAlert={showAlert}
+            />
+          </Tab>
+          <Tab
+            eventKey="settings"
+            title="Settings"
+            className="custom-tab-styles"
+          >
+            <SettingsPage defaultSettings={settings} alert={showAlert} />
+          </Tab>
+        </Tabs>
+      </Container>
+      <div className="background-indent"></div>
+    </>
   );
 };
 
