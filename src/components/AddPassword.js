@@ -10,6 +10,9 @@ import createPassword from "../utils/createPassword";
 const AddPassword = ({ addPassword }) => {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
+  const [special, setSpecial] = useState(true);
+  const [numbers, setNumbers] = useState(true);
+  const [length, setLength] = useState(20);
 
   const onSubmitPassword = (e) => {
     console.log("Adding password");
@@ -26,43 +29,61 @@ const AddPassword = ({ addPassword }) => {
     <Card className="mt-5 mb-3">
       <Card.Body>
         <Form onSubmit={onSubmitPassword}>
-          <Row className="my-3">
-            <Col>
-              <Form.Control
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Col>
-          </Row>
+          <Form.Group>
+            <Row className="my-3">
+              <Col>
+                <Form.Control
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Control
+                  placeholder="Password"
+                  value={pass}
+                  onChange={(e) => setPass(e.target.value)}
+                />
+              </Col>
+            </Row>
+          </Form.Group>
           <Row>
-            <Col>
-              <Form.Control
-                placeholder="Password"
-                value={pass}
-                onChange={(e) => setPass(e.target.value)}
-              />
-            </Col>
+            <Form.Group>
+              <Col xs={5}>
+                <Form.Check
+                  type="checkbox"
+                  label="Special Characters"
+                  checked={special}
+                />
+                <Form.Check
+                  type="checkbox"
+                  label="Include Numbers"
+                  checked={numbers}
+                />
+                <Form.Label>Password Length</Form.Label>
+                <Form.Control type="number" placeholder={length} />
+              </Col>
+            </Form.Group>
           </Row>
           <Row className="my-3">
-            <Col>
-              <Button type="submit" variant="secondary">
-                Save Password
-              </Button>
-              <Button
-                variant="dark"
-                className="mx-3"
-                onClick={() => setPass(createPassword(20))}
-              >
-                Generate Random Password
-              </Button>
-            </Col>
+            <Form.Group>
+              <Col>
+                <Button type="submit" variant="secondary">
+                  Save Password
+                </Button>
+                <Button
+                  variant="dark"
+                  className="mx-3"
+                  onClick={() => setPass(createPassword(20))}
+                >
+                  Generate Random Password
+                </Button>
+              </Col>
+            </Form.Group>
           </Row>
         </Form>
-
-        <p>- Special Characters</p>
-        <p>- Numbers</p>
-        <p>- Length of password</p>
       </Card.Body>
     </Card>
   );

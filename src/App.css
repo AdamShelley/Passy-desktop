@@ -12,10 +12,11 @@ body {
     height: 20vh;
     position:absolute;
     bottom: 0;
-    -webkit-clip-path: ellipse(70% 50% at 50% 92%);
+    /* -webkit-clip-path: ellipse(70% 50% at 50% 92%); */
     clip-path: ellipse(70% 70% at 50% 92%);
     margin-top: 2rem;
     z-index: -1;
+    opacity: .8;
 }
 
 .nav-link {

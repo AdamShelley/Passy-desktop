@@ -34,7 +34,7 @@ const PasswordsPage = ({
     <>
       {database && (
         <div>
-          <Row className="m-5">
+          <Row className="mt-5 mb-3">
             <Form.Control
               type="text"
               placeholder="Search Passwords"
