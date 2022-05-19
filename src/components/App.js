@@ -34,6 +34,7 @@ const App = () => {
   });
 
   const addPassword = (pass) => {
+    console.log(pass);
     if (pass.name === "" || pass.password === "")
       return showAlert("Please enter all fields", "danger");
     pass._id = Math.floor(Math.random() * 100);

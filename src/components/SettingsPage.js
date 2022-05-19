@@ -60,6 +60,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
               <Button size="sm" variant="danger" onClick={deletePasswords}>
                 Delete All passwords
               </Button>
+              <p>Warning - this is permanent and cannot be undone.</p>
             </Col>
           </Row>
         </>

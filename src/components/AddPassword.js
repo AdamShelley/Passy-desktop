@@ -17,7 +17,7 @@ const AddPassword = ({ addPassword }) => {
   const onSubmitPassword = (e) => {
     console.log("Adding password");
     e.preventDefault();
-    addPassword({ name, password: pass });
+    addPassword({ name, password: pass, special, numbers, length });
 
     setName("");
     setPass("");
@@ -51,23 +51,29 @@ const AddPassword = ({ addPassword }) => {
           </Form.Group>
           <Row>
             <Form.Group>
-              <Col xs={5}>
+              <Col xs={5} className="mt-4">
                 <Form.Check
                   type="checkbox"
                   label="Special Characters"
                   checked={special}
+                  onChange={() => setSpecial((prev) => !prev)}
                 />
                 <Form.Check
                   type="checkbox"
                   label="Include Numbers"
                   checked={numbers}
+                  onChange={() => setNumbers((prev) => !prev)}
                 />
-                <Form.Label>Password Length</Form.Label>
-                <Form.Control type="number" placeholder={length} />
+                <Form.Label className="mt-2">Password Length</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder={length}
+                  onChange={(e) => setLength(e.target.value)}
+                />
               </Col>
             </Form.Group>
           </Row>
-          <Row className="my-3">
+          <Row className="mt-5 my-3">
             <Form.Group>
               <Col>
                 <Button type="submit" variant="secondary">
@@ -76,7 +82,9 @@ const AddPassword = ({ addPassword }) => {
                 <Button
                   variant="dark"
                   className="mx-3"
-                  onClick={() => setPass(createPassword(20))}
+                  onClick={() =>
+                    setPass(createPassword(length, numbers, special))
+                  }
                 >
                   Generate Random Password
                 </Button>
