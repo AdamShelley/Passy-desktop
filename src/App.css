@@ -6,6 +6,39 @@ body {
 
 }
 
+
+.search-bar {
+    width: 100%;
+    position: relative;
+}
+
+.search-bar > input {
+    padding-right: 100px !important; 
+}
+
+.search-bar > button {
+    position: absolute;
+    font-size: 20px;
+    color: #ccc;
+    font-weight: 900;
+    width: 40px;
+    height: 100%;
+    text-align: center;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    transition: all .2s ease-in;
+    border-radius:2px;
+}
+
+.search-bar > button:hover {
+    /* border: 1px solid #3b3b3b; */
+    color: #3b3b3b;
+}
+
+
 .background-indent {
     background-color: #514f4f37;
     width: 100%;
@@ -31,6 +64,7 @@ body {
 .password-table-container {
     max-height: 50vh;
     overflow: scroll;
+    scrollbar-width: 10px;
     z-index: 5;
 }
 

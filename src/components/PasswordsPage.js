@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PasswordLine from "./PasswordLine";
 
 import Form from "react-bootstrap/Form";
@@ -15,6 +15,8 @@ const PasswordsPage = ({
   numResults,
   setNumResults,
 }) => {
+  const [currentSearch, setCurrentSearch] = useState("");
+
   const filterPasswords = (e) => {
     const searchString = e.target.value.toLowerCase();
     if (searchString.length > 0) {
@@ -34,13 +36,25 @@ const PasswordsPage = ({
     <>
       {database && (
         <div>
-          <Row className="mt-5 mb-3">
+          <Row className="search-bar mt-5 mb-3">
             <Form.Control
               type="text"
               placeholder="Search Passwords"
-              onChange={(e) => filterPasswords(e)}
+              onChange={(e) => {
+                filterPasswords(e);
+                setCurrentSearch(e.target.value);
+              }}
+              value={currentSearch}
             />
-            <span>X</span>
+            <button
+              onClick={() => {
+                setCurrentSearch("");
+                setSearchedPasswords(database);
+                setNumResults(database.length);
+              }}
+            >
+              X
+            </button>
           </Row>
           <div className="password-table-container">
             <Table className="table-styles">
@@ -66,7 +80,7 @@ const PasswordsPage = ({
               </tbody>
             </Table>
           </div>
-          <p className="m-3">No. of results found: {numResults}</p>
+          <p className="m-3 mt-5">No. of results found: {numResults}</p>
         </div>
       )}
     </>
