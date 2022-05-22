@@ -56,10 +56,12 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
             </Col>
           </Row>
           <Row className="mt-3">
-            <Col>
+            <Col xs={5}>
               <Button size="sm" variant="danger" onClick={deletePasswords}>
                 Delete All passwords
               </Button>
+            </Col>
+            <Col xs={5}>
               <p>Warning - this is permanent and cannot be undone.</p>
             </Col>
           </Row>

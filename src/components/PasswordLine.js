@@ -35,7 +35,11 @@ const PasswordLine = ({
         <Moment format="d/MM/YY">{new Date(created)}</Moment>
       </td>
       <td>
-        <Button variant="danger" size="sm" onClick={() => deletePassword(_id)}>
+        <Button
+          variant="outline-secondary"
+          size="sm"
+          onClick={() => deletePassword(_id)}
+        >
           X
         </Button>
       </td>
