@@ -43,10 +43,25 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
                 onChange={updateSettings}
               />
 
-              <label htmlFor="showPasswords" style={{ marginLeft: "1rem" }}>
+              <label htmlFor="showPasswords" style={{ marginLeft: ".5rem" }}>
                 Show Passwords
               </label>
             </Col>
+            <Row>
+              <Col className="mt-3">
+                <input
+                  type="checkbox"
+                  name="darkMode"
+                  id="darkMode"
+                  // checked={defaultSettings.hidePassword ? false : true}
+                  // onChange={updateSettings}
+                />
+
+                <label htmlFor="darkMode" style={{ marginLeft: ".5rem" }}>
+                  Dark Mode
+                </label>
+              </Col>
+            </Row>
           </Row>
           <Row className="mt-5">
             <Col>

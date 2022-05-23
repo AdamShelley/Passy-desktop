@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PasswordLine from "./PasswordLine";
-
+import Alert from "react-bootstrap/Alert";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
@@ -36,7 +36,7 @@ const PasswordsPage = ({
     <>
       {database && (
         <div>
-          <Row className="search-bar mt-5 mb-3">
+          <Row className="search-bar mt-5 mb-2">
             <Form.Control
               type="text"
               placeholder="Search Passwords"
@@ -56,6 +56,7 @@ const PasswordsPage = ({
               X
             </button>
           </Row>
+          <p className="m-3 mt-3">No. of results found: {numResults}</p>
           <div className="password-table-container">
             <Table className="table-styles">
               <thead>
@@ -80,7 +81,6 @@ const PasswordsPage = ({
               </tbody>
             </Table>
           </div>
-          <p className="m-3 mt-5">No. of results found: {numResults}</p>
         </div>
       )}
     </>

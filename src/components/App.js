@@ -4,9 +4,9 @@ import AddPassword from "./AddPassword";
 import SettingsPage from "./SettingsPage";
 import PasswordsPage from "./PasswordsPage";
 import Container from "react-bootstrap/container";
-import Alert from "react-bootstrap/Alert";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import Alert from "react-bootstrap/Alert";
 
 import "../App.css";
 
@@ -17,7 +17,7 @@ const App = () => {
   const [database, setDatabase] = useState(null);
   const [searchedPasswords, setSearchedPasswords] = useState();
   const [numResults, setNumResults] = useState(0);
-  const [alert, setAlert] = useState({
+  const [alertState, setAlertState] = useState({
     show: false,
     message: "",
     variant: "success",
@@ -32,6 +32,22 @@ const App = () => {
     setSearchedPasswords(database);
     setNumResults(database.length);
   });
+
+  const showAlert = (message, variant = "success", seconds = 3000) => {
+    setAlertState({
+      show: true,
+      message,
+      variant,
+    });
+
+    setTimeout(() => {
+      setAlertState({
+        show: false,
+        message: "",
+        variant: "success",
+      });
+    }, seconds);
+  };
 
   const addPassword = (pass) => {
     console.log(pass);
@@ -51,27 +67,12 @@ const App = () => {
     setSavedPasswords(savedPasswords.filter((pass) => pass._id !== _id));
 
     ipcRenderer.send("database:deletePass", _id);
-  };
 
-  const showAlert = (message, variant = "success", seconds = 3000) => {
-    setAlert({
-      show: true,
-      message,
-      variant,
-    });
-
-    setTimeout(() => {
-      setAlert({
-        show: false,
-        message: "",
-        variant: "success",
-      });
-    }, seconds);
+    showAlert("Password Deleted", "danger");
   };
 
   const home = (
     <>
-      {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
       <AddPassword addPassword={addPassword} />
     </>
   );
@@ -108,7 +109,11 @@ const App = () => {
             <SettingsPage defaultSettings={settings} alert={showAlert} />
           </Tab>
         </Tabs>
+        {alertState.show && (
+          <Alert variant={alertState.variant}>{alertState.message}</Alert>
+        )}
       </Container>
+      <div className="top-styling-orb"></div>
       <div className="background-indent"></div>
     </>
   );
