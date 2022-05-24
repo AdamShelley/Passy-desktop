@@ -44,7 +44,7 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
               />
 
               <label htmlFor="showPasswords" style={{ marginLeft: ".5rem" }}>
-                Show Passwords
+                Show/Hide Passwords
               </label>
             </Col>
             <Row>
@@ -58,21 +58,31 @@ const SettingsPage = ({ setSettingsPage, defaultSettings, alert }) => {
                 />
 
                 <label htmlFor="darkMode" style={{ marginLeft: ".5rem" }}>
-                  Dark Mode
+                  Dark Mode (WIP - doesn't do anything yet!)
                 </label>
               </Col>
             </Row>
           </Row>
           <Row className="mt-5">
             <Col>
-              <Button size="sm" variant="light" onClick={downloadPasswords}>
+              <Button
+                className="p-3"
+                size="sm"
+                variant="outline-secondary"
+                onClick={downloadPasswords}
+              >
                 Download passwords
               </Button>
             </Col>
           </Row>
           <Row className="mt-3">
             <Col xs={5}>
-              <Button size="sm" variant="danger" onClick={deletePasswords}>
+              <Button
+                className="p-3"
+                size="sm"
+                variant="danger"
+                onClick={deletePasswords}
+              >
                 Delete All passwords
               </Button>
             </Col>

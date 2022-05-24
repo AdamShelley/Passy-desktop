@@ -110,7 +110,9 @@ const App = () => {
           </Tab>
         </Tabs>
         {alertState.show && (
-          <Alert variant={alertState.variant}>{alertState.message}</Alert>
+          <Alert className="mt-3" variant={alertState.variant}>
+            {alertState.message}
+          </Alert>
         )}
       </Container>
       <div className="top-styling-orb"></div>

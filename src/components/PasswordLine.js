@@ -21,6 +21,8 @@ const PasswordLine = ({
     alert("Password Copied", "success");
   };
 
+  console.log(`${name}: ${created}`);
+
   return (
     <tr className="table-line-styles">
       <td>{name}</td>
@@ -32,11 +34,11 @@ const PasswordLine = ({
         {settings.hidePassword ? "*".repeat(password.length) : password}
       </td>
       <td>
-        <Moment format="d/MM/YY">{new Date(created)}</Moment>
+        <Moment format="DD/MM/YY">{new Date(created)}</Moment>
       </td>
       <td>
         <Button
-          variant="outline-secondary"
+          variant="outline-primary"
           size="sm"
           onClick={() => deletePassword(_id)}
         >
