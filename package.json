@@ -1,5 +1,5 @@
 {
-  "name": "Passy",
+  "name": "passy",
   "productName": "Passy",
   "version": "1.0.0",
   "description": "Password manager app",
@@ -35,9 +35,10 @@
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "@types/mini-css-extract-plugin": "^2.5.1",
     "babel-loader": "^8.1.0",
     "babili-webpack-plugin": "^0.1.2",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0  .2",
     "css-loader": "^3.5.3",
     "electron": "^9.0.0",
     "electron-devtools-installer": "^3.0.0",

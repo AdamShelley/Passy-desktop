@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BabiliPlugin = require("babili-webpack-plugin");
+// const BabiliPlugin = require("babili-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production"),
     }),
-    new BabiliPlugin(),
+    // new BabiliPlugin(),
   ],
   stats: {
     colors: true,
