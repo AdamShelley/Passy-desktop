@@ -44,6 +44,8 @@ function createMainWindow() {
     },
   });
 
+  app.dock.setIcon(`${__dirname}/assets/icon.icns`);
+
   let indexPath;
 
   if (isDev && process.argv.indexOf("--noDevServer") === -1) {
