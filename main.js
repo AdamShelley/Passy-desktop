@@ -38,13 +38,11 @@ function createMainWindow() {
     height: 800,
     show: false,
     backgroundColor: "white",
-    icon: `${__dirname}/assets/icons/png/icon.png`,
+    icon: `${__dirname}/assets/tray.png`,
     webPreferences: {
       nodeIntegration: true,
     },
   });
-
-  app.dock.setIcon(`${__dirname}/assets/icon.icns`);
 
   let indexPath;
 
