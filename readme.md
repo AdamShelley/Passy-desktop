@@ -1,6 +1,6 @@
 # Passy - Password Manager
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
+
 
 
 ### About
