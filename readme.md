@@ -4,11 +4,11 @@
 
 
 ### About
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+
 A simple password manager built with Electron.
-
-</br>
-
-
 
 ### Built With
 * [Electron](https://www.electronjs.org/)
