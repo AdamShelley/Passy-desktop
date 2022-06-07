@@ -1,10 +1,22 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  Tray,
+  Menu,
+  nativeImage,
+} = require("electron");
 const path = require("path");
 const url = require("url");
 const Store = require("./Store");
 
 let mainWindow;
 let tray;
+
+const dockIcon = nativeImage.createFromPath(
+  __dirname,
+  "/assets/icons/icon.icns"
+);
 
 // Init store & defaults
 const store = new Store({
@@ -38,7 +50,7 @@ function createMainWindow() {
     height: 800,
     show: false,
     backgroundColor: "white",
-    icon: `${__dirname}/assets/tray.png`,
+    // icon: dockIcon,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -92,6 +104,8 @@ function createMainWindow() {
       mainWindow.show();
     }
   });
+
+  app.dock.setIcon(dockIcon);
 
   tray.on("right-click", () => {
     const contextMenu = Menu.buildFromTemplate([
