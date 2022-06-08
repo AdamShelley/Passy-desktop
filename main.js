@@ -50,7 +50,7 @@ function createMainWindow() {
     height: 800,
     show: false,
     backgroundColor: "white",
-    // icon: dockIcon,
+    icon: dockIcon,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -141,6 +141,8 @@ function createMainWindow() {
 
   mainWindow.on("closed", () => (mainWindow = null));
 }
+
+app.dock.hide();
 
 app.on("ready", createMainWindow);
 

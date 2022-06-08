@@ -5,7 +5,7 @@
 
 ### About
 
-[![Product Name Screen Shot][product-screenshot]]
+![Product Name Screen Shot](https://raw.githubusercontent.com/AdamShelley/assets/screenshot1.png)
 
 
 A simple password manager built with Electron.
@@ -33,10 +33,14 @@ To install and run the project locally:
     ```
 4. Search in the newly created 'release-builds' folder for the application.
 
+### Usage
+
+
+
 
 ## Acknowledgements
 * [React & Electron Boilerplate](https://github.com/bradtraversy/simple-electron-react)
-* [Dock Icon] (<a href="https://www.flaticon.com/free-icons/lock" title="lock icons">Lock icons created by Freepik - Flaticon</a>)
+* [Dock Icon - Flaticon](https://www.flaticon.com/free-icons/lock)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
