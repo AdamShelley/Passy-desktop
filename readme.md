@@ -4,6 +4,8 @@
 
 
 ### About
+
+
 ![Product Name Screen Shot](https://raw.githubusercontent.com/AdamShelley/Passy-desktop/master/assets/screenshot1.png)
 
 
@@ -13,6 +15,13 @@ A simple password manager built with Electron.
 * [Electron](https://www.electronjs.org/)
 * [React.js](https://reactjs.org/)
 * [Bootstrap](https://getbootstrap.com/)
+
+
+### Features
+* Simple, lightweight password manager.
+* Generate 'random' passwords, using various options such as including special characters.
+* Download passwords to a JSON file for backup.
+
 
 ### Installation
 
@@ -32,7 +41,6 @@ To install and run the project locally:
     ```
 4. Search in the newly created 'release-builds' folder for the application.
 
-### Usage
 
 
 
