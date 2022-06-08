@@ -5,7 +5,11 @@
 
 ### About
 
+<<<<<<< HEAD
 ![Product Name Screen Shot](https://raw.githubusercontent.com/AdamShelley/Passy-desktop/master/assets/screenshot1.png)
+=======
+![Product Name Screen Shot](https://raw.githubusercontent.com/AdamShelley/Passy-desktop/assets/screenshot1.png)
+>>>>>>> 545f6e597fa6a2fb03e938524866bfb00aa14fde
 
 
 A simple password manager built with Electron.
