@@ -4,7 +4,6 @@
 
 
 ### About
-
 ![Product Name Screen Shot](https://raw.githubusercontent.com/AdamShelley/Passy-desktop/master/assets/screenshot1.png)
 
 
